@@ -22,4 +22,7 @@ msiexec.exe /package $downloadPath /quiet `
     ADD_PATH=1
 
 
-    
+
+# Path: scripts/adf-shir.sh
+
+
