@@ -1,5 +1,5 @@
 
-if (-false -eq (Test-Path "C:\Program Files\PowerShell\7\pwsh.exe")) {
+if ((Test-Path "C:\Program Files\PowerShell\7\pwsh.exe") -eq $false) {
     $pwshurl = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x64.msi"
     $downloadPath = "$env:TEMP\PowerShell-7.4.2-win-x64.msi"
     Invoke-WebRequest -Uri $pwshurl -OutFile $downloadPath
