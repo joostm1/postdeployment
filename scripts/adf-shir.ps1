@@ -26,9 +26,18 @@ if ((Test-Path "C:\Program Files\PowerShell\7\pwsh.exe") -eq $false) {
     Remove-Item $downloadPath
 }
 
+$installed=$(pwsh -Command "Get-InstalledModule -Name Az.DataFactory -ErrorAction SilentlyContinue")
+if ($installed -eq $null) {
+    pwsh -Command "
+        Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+        Install-Module -Name Az -AllowClobber -Scope AllUsers -Force
+    "
+}
 
-pwsh -Command "
-    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-    Install-Module -Name Az -AllowClobber -Scope AllUsers -Force
-"
+
+
+
+$irurl="https://download.microsoft.com/download/E/4/7/E4771905-1079-445B-8BF9-8A1A075D8A10/IntegrationRuntime_5.41.8888.1.msi"
+$downloadPath = "$env:TEMP\IntegrationRuntime_5.41.8888.1.msi"
+Invoke-WebRequest -Uri $irurl -OutFile $downloadPath
     
